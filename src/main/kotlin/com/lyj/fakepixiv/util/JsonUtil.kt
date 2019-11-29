@@ -1,7 +1,9 @@
 package com.lyj.fakepixiv.app.utils
 
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.lang.reflect.Type
 
 /**
  * @author greensun
@@ -14,11 +16,16 @@ object JsonUtil {
 
     val moshi: Moshi by lazy { Moshi.Builder().add(KotlinJsonAdapterFactory()).build() }
 
-    inline fun <reified T> bean2Json(source: T?): String {
+    inline fun <reified T> bean2Json(source: T?, vararg types: Type): String {
         if (source == null) {
             return ""
         }
-        val adapter = moshi.adapter(T::class.java)
+        val adapter = if (types.isNotEmpty()) {
+            val type = Types.newParameterizedType(T::class.java, *types)
+            moshi.adapter(type)
+        }else {
+            moshi.adapter(T::class.java)
+        }
         return adapter.toJson(source)
     }
 

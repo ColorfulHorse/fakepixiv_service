@@ -8,13 +8,14 @@ import io.vertx.kotlin.core.json.obj
  */
 object DBConfig {
 	val CONNECTION = json {
-		obj (
+		obj(
 			"host" to "127.0.0.1",
 			"port" to 27017,
 			"username" to "lyj",
-			"password" to "liaolove1314",
+			"password" to "lyjzzz812194178",
 			"db_name" to "fakepixiv"
-			//"authSource" to "fakepixiv.db"
 		)
 	}
+	const val ILLUST = "illust"
+	const val HISTORY = "history"
 }

@@ -8,15 +8,22 @@ import javax.swing.text.html.HTML.Tag.BR
  * Created by green sun on 2019/11/16.
  */
 @JsonClass(generateAdapter = true)
+data class HistoryReq(val userId: Long, val illust: Illust)
+
+@JsonClass(generateAdapter = true)
+data class History(val _id: String, val userId: Long, val illustId: Long, val view_time: Long)
+
+@JsonClass(generateAdapter = true)
 data class Illust(
+	var _id: Long = -1,
 	var caption: String = "",
 	var create_date: String = "",
 	val height: Int,
 	var id: Long,
-	var userId: Long,
 	var image_urls: ImageUrls = ImageUrls(),
 	var is_bookmarked: Boolean = false,
 	val is_muted: Boolean = false,
+	val type: String,
 	val meta_pages: List<MetaPage> = listOf(),
 	val meta_single_page: MetaSinglePage = MetaSinglePage(),
 	val page_count: Int = 0,
@@ -35,7 +42,13 @@ data class Illust(
 	val is_mypixiv_only: Boolean = false,
 	val is_x_restricted: Boolean = false,
 	val x_restrict: Int = 0 // 1 r-18
-)
+) {
+	companion object {
+		const val ILLUST = "illust"
+		const val COMIC = "manga"
+		const val NOVEL = "novel"
+	}
+}
 
 @JsonClass(generateAdapter = true)
 data class MetaSinglePage(
@@ -73,7 +86,7 @@ data class ImageUrls(
 @JsonClass(generateAdapter = true)
 data class User(
 	val account: String = "",
-	val id: String = "",
+	val id: Long = -1,
 	val comment: String = "",
 	val is_mail_authorized: Boolean = false,
 	val is_premium: Boolean = false,

@@ -1,6 +1,5 @@
 package com.lyj.fakepixiv.util
 
-import io.reactivex.internal.util.QueueDrainHelper.request
 import io.vertx.ext.web.RoutingContext
 
 /**
@@ -12,7 +11,7 @@ import io.vertx.ext.web.RoutingContext
  */
 fun RoutingContext.parseJsonBody(next: (String) -> Unit) {
 	request().bodyHandler {
-		val json = it.toJsonObject().toString()
+		val json = it.toString("UTF-8")
 		next(json)
 	}
 }
@@ -22,3 +21,5 @@ fun RoutingContext.endJson(json: String) {
 		.putHeader("content-type", "application/json")
 		.end(json)
 }
+
+

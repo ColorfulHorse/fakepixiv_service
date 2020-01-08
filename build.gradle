@@ -31,11 +31,11 @@ def doOnChange = './gradlew classes'
 
 
 compileKotlin {
-    kotlinOptions.jvmTarget = '1.8'
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 compileTestKotlin {
-    kotlinOptions.jvmTarget = '1.8'
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 
@@ -74,4 +74,5 @@ dependencies {
     testImplementation "io.vertx:vertx-junit5:$vertxVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterEngineVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterEngineVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }

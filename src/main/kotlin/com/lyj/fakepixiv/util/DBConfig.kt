@@ -18,4 +18,5 @@ object DBConfig {
 	}
 	const val ILLUST = "illust"
 	const val HISTORY = "history"
+	const val VERSIONS = "versions"
 }

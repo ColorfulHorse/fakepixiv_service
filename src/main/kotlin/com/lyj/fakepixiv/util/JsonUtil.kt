@@ -1,5 +1,6 @@
 package com.lyj.fakepixiv.app.utils
 
+import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -29,8 +30,10 @@ object JsonUtil {
         return adapter.toJson(source)
     }
 
-    inline fun <reified T> json2Bean(json: String): T? {
+    inline fun <reified T> json2Bean(json: String): T {
         val adapter = moshi.adapter(T::class.java)
-        return adapter.fromJson(json)
+        val bean = adapter.fromJson(json) ?: throw JsonDataException("json类型不正确")
+        return bean
     }
+    
 }

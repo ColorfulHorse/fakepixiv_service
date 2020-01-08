@@ -113,11 +113,16 @@ class MainVerticle : AbstractVerticle(), CoroutineScope by CoroutineScope(Dispat
 			val res = BaseResponse(BaseResponse.CODE_SERVER_ERR, data = Any())
 			context.response().end(JsonUtil.bean2Json(res))
 		}) {
-			val threadName = Thread.currentThread().name
-			var pageNo = 1
-			var pageSize = 20
-			pageNo = context.request().getParam("pageNo").toInt()
-			pageSize = context.request().getParam("pageSize").toInt()
+			val pageNo = try {
+				context.request().getParam("pageNo").toInt()
+			}catch (e: Exception) {
+				1
+			}
+			val pageSize = try {
+				context.request().getParam("pageSize").toInt()
+			}catch (e: Exception) {
+				20
+			}
 			val userId = context.request().getParam("userId").toInt()
 			val category = context.request().getParam("category")
 			val original = AggregateLINQ.create(DBConfig.HISTORY)

@@ -55,6 +55,8 @@ suspend fun MongoClient.aggregateCountAwait(collection: String, pipeline: JsonAr
 			aggregate(collection, pipeline)
 				.handler { res ->
 					handler.handle(res.getLong(fieldName))
+				}.endHandler {
+					handler.handle(0)
 				}.exceptionHandler {
 					throw it
 				}

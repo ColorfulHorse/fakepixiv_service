@@ -1,5 +1,7 @@
 = Fakepixiv
 
+### 由于非会员无法使用浏览历史功能，所以做了个接口用于记录浏览历史信息
+
 image:https://img.shields.io/badge/vert.x-3.8.3-purple.svg[link="https://vertx.io"]
 
 This application was generated using http://start.vertx.io
